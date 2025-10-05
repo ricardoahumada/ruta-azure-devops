@@ -49,8 +49,8 @@
 ## Areas
 
 ## Cloud solution
-- Dev
-- Test 
+- CS-Dev-Team
+- CS-Test-Team
 ## App Solution
-- Dev
-- Test 
+- AS-Dev-Team
+- AS-Test-Team
