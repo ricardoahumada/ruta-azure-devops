@@ -45,3 +45,12 @@
     └── Feature: Order History
         └── User Story: As a user, I want to see my order history after logging in...
             └── Task: Develop GET /api/orders for logged-in user (compartido)
+
+## Areas
+
+## Cloud solution
+- Dev
+- Test 
+## App Solution
+- Dev
+- Test 
