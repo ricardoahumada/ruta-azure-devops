@@ -2,6 +2,7 @@
 
 ## Estructura
 
+```text
 ├── Epic: User Management
 │   └── Feature: User Authentication
 │       ├── User Story: As a new user, I want to register with my email and password so that I can create an account and access personalized features.
@@ -46,6 +47,8 @@
     └── Feature: Order History
         └── User Story: As a user, I want to see my order history after logging in so that I can review past purchases, delivery status, and receipts.
             └── Task: Reuse and enhance GET /api/orders endpoint (shared with Shopping & Checkout)
+```
+
 
 ## Areas
 
