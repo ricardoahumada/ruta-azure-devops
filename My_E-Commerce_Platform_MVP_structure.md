@@ -1,0 +1,47 @@
+#  E-Commerce Platform MVP
+
+## Estructura
+
+├── Epic: User Management
+│   └── Feature: User Authentication
+│       ├── User Story: As a new user, I want to register...
+│       │   ├── Task: Design registration UI mockup
+│       │   ├── Task: Develop backend API for user registration
+│       │   └── Bug: Login fails with valid credentials (relacionado)
+│       └── User Story: As a returning user, I want to log in securely...
+│           ├── Task: Create frontend login form component
+│           ├── Task: Set up JWT authentication middleware
+│           └── Bug: Login fails with valid credentials
+│
+├── Epic: Product Catalog
+│   ├── Feature: Product Browsing
+│   │   ├── User Story: As a shopper, I want to browse products by category...
+│   │   │   ├── Task: Integrate product listing API with frontend
+│   │   │   └── Task: Design registration UI mockup (ejemplo reutilizado)
+│   └── Feature: Admin Product Management
+│       ├── User Story: As an admin, I want to add a new product...
+│       │   ├── Task: Design admin product form
+│       │   ├── Task: Implement product CRUD API endpoints
+│       │   └── Bug: Product image upload fails over 2MB
+│       └── User Story: As an admin, I want to edit or delete existing products...
+│           └── Task: Implement product CRUD API endpoints (compartido)
+│
+├── Epic: Shopping & Checkout
+│   ├── Feature: Cart Management
+│   │   ├── User Story: As a user, I want to add products to my cart...
+│   │   │   └── Task: Build cart context/provider in React
+│   │   └── User Story: As a user, I want to view and modify items in my cart...
+│   │       ├── Task: Save cart to localStorage on change
+│   │       └── Bug: Cart total not updating after quantity change
+│   └── Feature: Secure Checkout
+│       ├── User Story: As a buyer, I want to complete my purchase using Stripe...
+│       │   ├── Task: Integrate Stripe Elements on checkout page
+│       │   ├── Task: Create order confirmation page
+│       │   └── Bug: Stripe test payment succeeds but no order is created
+│       └── User Story: As a user, I want to see my order history...
+│           └── Task: Develop GET /api/orders for logged-in user
+│
+└── Epic: Order Management
+    └── Feature: Order History
+        └── User Story: As a user, I want to see my order history after logging in...
+            └── Task: Develop GET /api/orders for logged-in user (compartido)
