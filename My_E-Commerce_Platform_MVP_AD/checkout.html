@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Checkout</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="form-container">
+    <h2>Finalizar Compra</h2>
+    <p>Simulación de pago con Stripe (solo interfaz)</p>
+    
+    <div id="payment-form">
+      <input type="text" placeholder="Nombre en tarjeta" required />
+      <input type="text" placeholder="Número de tarjeta" required />
+      <input type="text" placeholder="MM/AA" required />
+      <input type="text" placeholder="CVV" required />
+      <button id="payBtn">Pagar Ahora</button>
+    </div>
+
+    <p id="result" style="margin-top: 20px;"></p>
+  </div>
+
+  <script>
+    document.getElementById('payBtn').addEventListener('click', () => {
+      document.getElementById('result').textContent = '✅ Pago exitoso. ¡Gracias por tu compra!';
+      document.getElementById('result').style.color = 'green';
+
+      const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+      orders.push({
+        id: Date.now(),
+        date: new Date().toISOString().split('T')[0],
+        total: parseFloat(localStorage.getItem('cartTotal') || '0')
+      });
+      localStorage.setItem('orders', JSON.stringify(orders));
+      localStorage.removeItem('cart');
+      localStorage.removeItem('cartTotal');
+    });
+  </script>
+</body>
+</html>

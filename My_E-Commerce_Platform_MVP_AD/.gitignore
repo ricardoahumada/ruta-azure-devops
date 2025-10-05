@@ -1,0 +1,41 @@
+# Dependencias
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Entorno de desarrollo
+.env.local
+.env
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Playwright
+test-results/
+playwright-report/
+test-output/
+*.zip
+
+# Logs y artefactos temporales
+logs/
+*.log
+
+# Archivos de sistema Windows
+$RECYCLE.BIN/
+Desktop.ini
+
+# Archivos de Azure DevOps (si usas workspace local)
+azure-pipelines.yml.bak
+
+# Otros
+coverage/
+dist/
+build/
+out/
+.next/
+.nuxt/

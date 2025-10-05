@@ -1,0 +1,13 @@
+{
+  "name": "ecommerce-mvp-sprint1",
+  "version": "1.0.0",
+  "description": "Sprint 1 MVP for E-Commerce Platform",
+  "scripts": {
+    "test": "npx playwright test",
+    "serve": "npx http-server -c-1 -p 8080"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "http-server": "^14.1.1"
+  }
+}

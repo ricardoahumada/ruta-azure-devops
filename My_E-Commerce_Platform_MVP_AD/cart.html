@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Carrito</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Carrito de Compras</h1>
+    <a href="index.html">← Seguir comprando</a>
+    <a href="checkout.html" id="checkoutBtn" style="display:none;">Ir a Checkout</a>
+  </header>
+
+  <main>
+    <div id="cartItems"></div>
+    <h3>Total: $<span id="total">0.00</span></h3>
+  </main>
+
+  <script src="js/utils.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    renderCart();
+  </script>
+</body>
+</html>

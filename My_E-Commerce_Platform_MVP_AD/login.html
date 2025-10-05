@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="form-container">
+    <h2>Iniciar Sesión</h2>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Contraseña" required />
+      <button type="submit">Iniciar Sesión</button>
+      <p>¿No tienes cuenta? <a href="register.html">Regístrate</a></p>
+    </form>
+    <div id="error" style="color: red; display: none;"></div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      if (email === 'user@example.com' && password === '123456') {
+        const token = btoa(JSON.stringify({ email, exp: Date.now() + 3600000 }));
+        localStorage.setItem('token', token);
+        window.location.href = 'index.html';
+      } else {
+        document.getElementById('error').style.display = 'block';
+        document.getElementById('error').textContent = 'Credenciales inválidas';
+      }
+    });
+  </script>
+</body>
+</html>
