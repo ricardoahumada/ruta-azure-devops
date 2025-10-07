@@ -1,0 +1,11 @@
+﻿Work Item Type,Title,Description,Priority
+User Story,"As a new user, I want to register with my email and password so that I can access personalized features.","A registration form should validate inputs, send confirmation email, store encrypted password, and redirect to dashboard.",1
+User Story,"As a returning user, I want to log in securely to my account.","Implement login form with validation, JWT token generation, remember-me option, and error handling for failed attempts.",1
+User Story,"As a shopper, I want to browse products by category so that I can find what I need quickly.","Display categorized product grid with images, names, prices, and ratings. Include navigation sidebar.",2
+User Story,"As a shopper, I want to search for products using keywords.","Implement full-text search bar with autocomplete and results page showing matching products.",2
+User Story,"As a user, I want to add products to my cart from the product listing or detail page.","Clicking 'Add to Cart' increases cart count, shows toast message, and persists item in session/local storage.",1
+User Story,"As a user, I want to view and modify items in my cart before checkout.","Show cart summary with thumbnails, titles, prices, quantity selectors, and subtotal. Allow removal of items.",1
+User Story,"As a buyer, I want to complete my purchase using a credit card via Stripe.","Redirect to Stripe Checkout or embed Stripe Elements. Capture payment, confirm success/failure, and create order record.",1
+User Story,"As a user, I want to see my order history after logging in.","Fetch and display list of previous orders with dates, totals, statuses, and links to view details.",3
+User Story,"As an admin, I want to add a new product to the catalog.","Form with fields: name, description, price, category, image upload, stock quantity. Save to database and make visible on site.",2
+User Story,"As an admin, I want to edit or delete existing products.","Provide table/list of products with Edit/Delete buttons. Confirm deletion and update visibility instantly.",2

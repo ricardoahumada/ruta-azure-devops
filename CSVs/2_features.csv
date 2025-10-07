@@ -1,0 +1,7 @@
+﻿Work Item Type,Title,Description,Priority
+Feature,User Authentication,"Implement sign-up, login, logout, password reset using email verification and JWT tokens.",1
+Feature,Product Browsing,"Allow users to view product listings by category, apply filters (price, rating), and search by keyword.",2
+Feature,Cart Management,"Enable users to add, remove, and update quantities in their shopping cart. Persist cart across sessions.",1
+Feature,Secure Checkout,"Integrate a payment gateway (Stripe) to process credit card payments securely and confirm purchase.",1
+Feature,Order History,"Display past orders with status (pending, shipped, delivered) and details per order.",3
+Feature,Admin Product Management,"Allow admin users to create, edit, delete, and publish products in the catalog.",2

@@ -1,0 +1,15 @@
+﻿Work Item Type,Title,Description,Priority
+Task,Design registration UI mockup,"Create Figma design for /register page with input validation states and success flow.",2
+Task,Develop backend API for user registration,"Build POST /api/auth/register endpoint with input validation, hashing, and email service integration.",1
+Task,Set up JWT authentication middleware,"Implement Express middleware to verify tokens and protect private routes.",1
+Task,Create frontend login form component,"React component with formik/yup validation, loading state, and error messages.",2
+Task,Integrate product listing API with frontend,"Call GET /api/products and render response in responsive grid layout.",2
+Task,Implement search API with fuzzy matching,"Use MongoDB text index or ElasticSearch to support partial name/description matches.",2
+Task,Build cart context/provider in React,"Manage cart state globally using React Context or Redux Toolkit.",1
+Task,Save cart to localStorage on change,"Persist cart contents when user adds/removes items, even if they close the browser.",2
+Task,Integrate Stripe Elements on checkout page,"Embed Stripe.js elements for card number, expiry, CVC; handle token creation.",1
+Task,Create order confirmation page,"Show success message, order ID, estimated delivery, and link to order history.",2
+Task,Develop GET /api/orders for logged-in user,"Return list of user’s orders with line items and total amounts.",3
+Task,Design admin product form,"Wireframe input fields, image uploader, rich text editor for description.",2
+Task,Implement product CRUD API endpoints,"Create RESTful routes: POST /products, PUT /products/{id}, DELETE /products/{id}.",1
+Task,Deploy backend to Azure App Service,"Configure CI/CD pipeline to deploy Node.js app to Azure.",3

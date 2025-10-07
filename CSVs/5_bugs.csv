@@ -1,0 +1,6 @@
+﻿Work Item Type,Title,Description,Priority
+Bug,Login fails with valid credentials,"Users report being unable to log in despite correct email/password. Error: 'Invalid credentials' appears.",1
+Bug,Cart total not updating after quantity change,"When increasing item quantity, displayed total remains unchanged until page refresh.",2
+Bug,Stripe test payment succeeds but no order is created,"Payment processes successfully, but backend does not persist order in database.",1
+Bug,Product image upload fails over 2MB,"Large files fail silently during admin product creation. No error message shown.",3
+Bug,Mobile menu toggle doesn’t work on iOS Safari,"Hamburger menu click has no effect on certain iPhone devices.",2
