@@ -1,26 +1,4 @@
 "Work Item Type","Title 1","Title 2","Title 3","Title 4","Description","Acceptance Criteria","Priority"
-"Epic","User Management","","","","Manage user registration, login, profile, and authentication for customers and admins.","","1"
-"Feature","","User Authentication","","","Implement sign-up, login, password reset with email verification and JWT tokens.","","2"
-"User Story","","","As a new user, I want to register with my email and password so that I can access personalized features.","","A registration form should validate inputs, send confirmation email, store encrypted password, and redirect to dashboard.","Given I am on the registration page, When I enter valid details and submit, Then an account is created and confirmation email is sent.",1
-"Task","","","","Design registration UI mockup","Create Figma design for /register page with input validation states and success flow.","","2"
-"Task","","","","Develop backend API for user registration","Build POST /api/auth/register endpoint with input validation, hashing, and email service integration.","","1"
-"Bug","","","","Login fails with valid credentials","Users report being unable to log in despite correct email/password. Error: 'Invalid credentials' appears.","","1"
-"User Story","","","As a returning user, I want to log in securely to my account.","","Implement login form with validation, JWT token generation, remember-me option, and error handling for failed attempts.","Given I am on the login page, When I enter correct credentials, Then I am logged in and redirected to the dashboard.",1
-"Task","","","","Create frontend login form component","React component with formik/yup validation, loading state, and error messages.","","2"
-"Task","","","","Set up JWT authentication middleware","Implement Express middleware to verify tokens and protect private routes.","","1"
-"Bug","","","","Login fails with valid credentials","Users report being unable to log in despite correct email/password. Error: 'Invalid credentials' appears.","","1"
-"Epic","Product Catalog","","","","Enable browsing, searching, and admin management of products and categories.","","2"
-"Feature","","Product Browsing","","","Allow users to view product listings by category, apply filters (price, rating), and search by keyword.","","2"
-"User Story","","","As a shopper, I want to browse products by category so that I can find what I need quickly.","","Display categorized product grid with images, names, prices, and ratings. Include navigation sidebar.","Given I am on the homepage, When I click a category, Then I see all products in that category.",2
-"Task","","","","Integrate product listing API with frontend","Call GET /api/products and render response in responsive grid layout.","","2"
-"Task","","","","Design registration UI mockup","Reused task: Create Figma design for consistency in UI components.","","2"
-"Feature","","Admin Product Management","","","Allow admin users to create, edit, delete, and publish products in the catalog.","","2"
-"User Story","","","As an admin, I want to add a new product to the catalog.","","Form with fields: name, description, price, category, image upload, stock quantity. Save to database and make visible on site.","Given I am logged in as admin, When I fill the product form and submit, Then the product appears in the catalog.",2
-"Task","","","","Design admin product form","Wireframe input fields, image uploader, rich text editor for description.","","2"
-"Task","","","","Implement product CRUD API endpoints","Create RESTful routes: POST /products, PUT /products/{id}, DELETE /products/{id}.","","1"
-"Bug","","","","Product image upload fails over 2MB","Large files fail silently during admin product creation. No error message shown.","","3"
-"User Story","","","As an admin, I want to edit or delete existing products.","","Provide table/list of products with Edit/Delete buttons. Confirm deletion and update visibility instantly.","Given I am viewing the product list, When I click Delete and confirm, Then the product is removed from the catalog.",2
-"Task","","","","Implement product CRUD API endpoints","Shared task: Ensure edit and delete functionality is fully implemented and tested.","","1"
 "Epic","Shopping & Checkout","","","","Support adding items to cart, managing the cart, and completing purchases through secure payment processing.","","1"
 "Feature","","Cart Management","","","Enable users to add, remove, and update quantities in their shopping cart. Persist cart across sessions.","","1"
 "User Story","","","As a user, I want to add products to my cart from the product listing or detail page.","","Clicking 'Add to Cart' increases cart count, shows toast message, and persists item in session/local storage.","Given I view a product, When I click 'Add to Cart', Then the item is added and counter updates.",1

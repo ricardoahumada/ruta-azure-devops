@@ -1,5 +1,3 @@
 ﻿Work Item Type,Title,Description,Priority
-Epic,User Management,"Handle registration, login, profile management, and authentication for customers and admins.",2
-Epic,Product Catalog,"Enable administrators to manage products, categories, inventory, and pricing. Allow users to browse and search items.",2
 Epic,Shopping & Checkout,"Support adding items to cart, managing the cart, and completing purchases through secure payment processing.",1
 Epic,Order Management,"Track, view, and manage customer orders from placement to fulfillment.",3
