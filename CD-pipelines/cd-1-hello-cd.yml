@@ -1,0 +1,9 @@
+trigger: none
+pr: none
+
+pool:
+  name: RicardoPoolWin
+
+steps:
+- script: echo "¡Hola desde el pipeline de entrega continua (CD)!"
+  displayName: 'Saludo CD'

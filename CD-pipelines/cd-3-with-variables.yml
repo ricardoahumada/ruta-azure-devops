@@ -1,0 +1,33 @@
+trigger: none
+pr: none
+
+variables:
+- name: appName
+  value: 'MYEcomm'
+- name: resourceGroup
+  value: 'RutaDevOps'
+- name: serviceConnection
+  value: 'Azure-RutaDevOps'
+
+pool:
+  name: RicardoPoolWin
+
+steps:
+- script: |
+    echo "Desplegando en la app: $(appName)"
+    echo "Resource group: $(resourceGroup)"
+  displayName: 'Mostrar variables'
+
+- task: DownloadPipelineArtifact@2
+  inputs:
+    artifactName: 'drop'
+    targetPath: '$(Build.SourcesDirectory)/drop'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: '$(serviceConnection)'
+    appType: 'webApp'
+    WebAppName: '$(appName)'
+    ResourceGroupName: '$(resourceGroup)'
+    packageForLinux: '$(Build.SourcesDirectory)/drop/drop.zip'

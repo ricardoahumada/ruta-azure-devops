@@ -1,0 +1,20 @@
+trigger:
+- main
+
+pool:
+  name: RicardoPoolWin
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x'
+  displayName: 'Instalar Node.js'
+
+- script: npm ci
+  displayName: 'Instalar dependencias'
+
+- script: npx playwright install --with-deps
+  displayName: 'Instalar navegadores de Playwright'
+
+- script: npm test
+  displayName: 'Ejecutar pruebas E2E'

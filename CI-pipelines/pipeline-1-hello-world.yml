@@ -1,0 +1,9 @@
+trigger:
+- main
+
+pool:
+  name: RicardoPoolWin
+
+steps:
+- script: echo "¡Hola, Azure DevOps!"
+  displayName: 'Saludo inicial'

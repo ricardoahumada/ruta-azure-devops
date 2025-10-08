@@ -1,0 +1,22 @@
+trigger: none
+pr: none
+
+pool:
+  name: RicardoPoolWin
+
+steps:
+- task: DownloadPipelineArtifact@2
+  inputs:
+    buildType: 'current'
+    artifactName: 'drop'
+    targetPath: '$(Build.SourcesDirectory)/drop'
+  displayName: 'Descargar artefacto de CI'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure-RutaDevOps'
+    appType: 'webApp'
+    WebAppName: 'MYEcomm'
+    packageForLinux: '$(Build.SourcesDirectory)/drop/drop.zip'
+  displayName: 'Desplegar en App Service existente'

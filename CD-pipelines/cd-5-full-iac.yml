@@ -1,0 +1,54 @@
+trigger: none
+pr: none
+
+variables:
+  appName: 'MYEcomm'
+  resourceGroup: 'RutaDevOps'
+  location: 'eastus'
+  serviceConnection: 'Azure-RutaDevOps'
+
+pool:
+  name: RicardoPoolWin
+
+steps:
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: '$(serviceConnection)'
+    scriptType: 'pscore'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      # Crear resource group si no existe
+      $rgExists = az group show --name $(resourceGroup) 2>$null
+      if (-not $rgExists) {
+        Write-Host "Creando resource group $(resourceGroup) en $(location)..."
+        az group create --name $(resourceGroup) --location $(location)
+      }
+
+      # Crear App Service Plan Free
+      $planName = "FreePlan-$(resourceGroup)"
+      $planExists = az appservice plan show --name $planName --resource-group $(resourceGroup) 2>$null
+      if (-not $planExists) {
+        az appservice plan create --name $planName --resource-group $(resourceGroup) --location $(location) --sku F1
+      }
+
+      # Crear App Service
+      $appExists = az webapp show --name $(appName) --resource-group $(resourceGroup) 2>$null
+      if (-not $appExists) {
+        az webapp create --name $(appName) --resource-group $(resourceGroup) --plan $planName
+      }
+  displayName: 'Crear infraestructura completa (RG + App Service)'
+
+- task: DownloadPipelineArtifact@2
+  inputs:
+    artifactName: 'drop'
+    targetPath: '$(Build.SourcesDirectory)/drop'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: '$(serviceConnection)'
+    appType: 'webApp'
+    WebAppName: '$(appName)'
+    ResourceGroupName: '$(resourceGroup)'
+    packageForLinux: '$(Build.SourcesDirectory)/drop/drop.zip'
+  displayName: 'Desplegar aplicación'

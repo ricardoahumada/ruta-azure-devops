@@ -1,0 +1,50 @@
+trigger: none
+pr: none
+
+variables:
+  appName: 'MYEcomm'
+  resourceGroup: 'RutaDevOps'
+  location: 'eastus'
+  serviceConnection: 'Azure-RutaDevOps'
+
+pool:
+  name: RicardoPoolWin
+
+steps:
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: '$(serviceConnection)'
+    scriptType: 'pscore'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      # Verificar si el App Service ya existe
+      $exists = az webapp show --name $(appName) --resource-group $(resourceGroup) 2>$null
+      if (-not $exists) {
+        Write-Host "App Service $(appName) no existe. Creando..."
+        # Asegurar que el plan de App Service exista (nivel Free)
+        $planExists = az appservice plan show --name FreePlan-$(resourceGroup) --resource-group $(resourceGroup) 2>$null
+        if (-not $planExists) {
+          az appservice plan create --name FreePlan-$(resourceGroup) --resource-group $(resourceGroup) --location $(location) --sku F1
+        }
+        # Crear la app
+        az webapp create --name $(appName) --resource-group $(resourceGroup) --plan FreePlan-$(resourceGroup)
+        Write-Host "✅ App Service creada: $(appName)"
+      } else {
+        Write-Host "✅ App Service ya existe: $(appName)"
+      }
+  displayName: 'Crear App Service si no existe'
+
+- task: DownloadPipelineArtifact@2
+  inputs:
+    artifactName: 'drop'
+    targetPath: '$(Build.SourcesDirectory)/drop'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: '$(serviceConnection)'
+    appType: 'webApp'
+    WebAppName: '$(appName)'
+    ResourceGroupName: '$(resourceGroup)'
+    packageForLinux: '$(Build.SourcesDirectory)/drop/drop.zip'
+  displayName: 'Desplegar aplicación'
