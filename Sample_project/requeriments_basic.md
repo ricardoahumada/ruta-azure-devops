@@ -1,4 +1,5 @@
-#  E-Commerce Platform MVP
+# **E-Commerce Platform MVP Basic Requirements**
+
 
 ## Estructura
 

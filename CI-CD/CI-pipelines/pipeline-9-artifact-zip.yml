@@ -1,0 +1,58 @@
+trigger: none
+
+pool:
+  name: MyOrgPoll
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x'
+  displayName: 'Instalar Node.js'
+
+- script: npm ci
+  displayName: 'Instalar dependencias'
+
+- script: npx playwright install --with-deps
+  displayName: 'Instalar navegadores de Playwright'
+
+- script: npm test
+  displayName: 'Ejecutar pruebas E2E'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'test-results/**/*.xml'
+    failTaskOnFailedTests: true
+  condition: succeededOrFailed()
+  displayName: 'Publicar resultados de pruebas'
+
+- script: |
+    echo Creando archivo ZIP para despliegue...
+    powershell -Command "Compress-Archive -Path *.html, css, js -DestinationPath drop.zip -Force"
+  displayName: 'Crear ZIP de producción'
+  condition: succeeded()
+
+- script: |
+    mkdir $(Build.ArtifactStagingDirectory)\package
+    copy $(Build.SourcesDirectory)\drop.zip $(Build.ArtifactStagingDirectory)\package\
+  displayName: 'Preparar carpeta para Universal Package'
+  condition: succeeded()
+
+- task: UniversalPackages@0
+  inputs:
+    command: 'publish'
+    publishDirectory: '$(Build.ArtifactStagingDirectory)/package'
+    vstsFeedPublish: 'My_E-Commerce_Platform_MVP_TS/MyEcommFeed'
+    vstsFeedPackagePublish: 'e2e-test-report'
+    versionOption: 'custom'
+    versionPublish: '1.0.$(Build.BuildId)'
+  condition: succeeded()
+  displayName: 'Publicar ZIP como Universal Package en Azure Artifacts'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.SourcesDirectory)/drop.zip'
+    artifact: 'drop'
+    publishLocation: 'pipeline'
+  condition: succeeded()
+  displayName: 'Publicar ZIP para Azure App Service'

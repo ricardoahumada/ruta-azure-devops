@@ -1,0 +1,74 @@
+trigger: none
+
+stages:
+- stage: Build_and_Test
+  displayName: 'CI: Compilar, probar y empaquetar'
+  pool:
+    name: RicardoPoolWin
+  jobs:
+  - job: BuildJob
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '18.x'
+      displayName: 'Instalar Node.js'
+
+    - script: npm ci
+      displayName: 'Instalar dependencias'
+
+    - script: npx playwright install --with-deps
+      displayName: 'Instalar navegadores de Playwright'
+
+    - script: npm test
+      displayName: 'Ejecutar pruebas E2E'
+
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: 'test-results/**/*.xml'
+        failTaskOnFailedTests: true
+      condition: succeededOrFailed()
+      displayName: 'Publicar resultados de pruebas'
+
+    - script: |
+        echo Creando archivo ZIP para despliegue...
+        powershell -Command "Compress-Archive -Path *.html, css, js -DestinationPath drop.zip -Force"
+      displayName: 'Crear ZIP de producción'
+      condition: succeeded()  # Solo si los tests pasaron
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Build.SourcesDirectory)/drop.zip'
+        artifact: 'drop'
+        publishLocation: 'pipeline'
+      condition: succeeded()
+      displayName: 'Publicar ZIP para despliegue'
+
+- stage: Deploy_to_Production
+  displayName: 'CD: Desplegar en App Service'
+  dependsOn: Build_and_Test
+  condition: succeeded()  # Solo si la etapa anterior tuvo éxito
+  pool:
+    name: RicardoPoolWin
+  jobs:
+  - deployment: DeployJob
+    environment: 'production'  # Opcional pero recomendado para auditoría y aprobaciones
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              buildType: 'current'
+              artifactName: 'drop'
+              targetPath: '$(Pipeline.Workspace)/drop'
+            displayName: 'Descargar artefacto de CI'
+
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'RutaDevOps' # Nombre de la conexión de servicio
+              appType: 'webApp'
+              WebAppName: 'MYEcomm'
+              packageForLinux: '$(Pipeline.Workspace)/drop/drop.zip'
+            displayName: 'Desplegar en App Service existente'
